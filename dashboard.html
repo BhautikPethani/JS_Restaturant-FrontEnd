@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="tabs">
+            <div class="tab" id="ordersTab">Orders</div>
+            <div class="tab" id="addFoodTab">Add Food</div>
+        </div>
+        <div class="tab-content" id="ordersContent">
+            <!-- Orders content goes here -->
+            <table id="ordersTable">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Food Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersBody">
+                    <!-- Orders rows go here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-content" id="addFoodContent">
+            <!-- Add Food content goes here -->
+            <form id="addFoodForm">
+                <input type="text" id="foodName" placeholder="Food Name">
+                <input type="text" id="foodDescription" placeholder="Food Description">
+                <input type="number" id="foodPrice" placeholder="Food Price">
+                <input type="text" id="foodCategory" placeholder="Food Category">
+                <input type="submit" value="Add Food">
+            </form>
+        </div>
+    </div>
+
+    <script src="/services/dashboard.js"></script>
+</body>
+
+</html>
