@@ -1,0 +1,142 @@
+body {
+  background-color: #7c993a;
+}
+
+.signup-form {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(109, 245, 4, 0.1);
+  margin: 100px auto;
+  padding: 30px;
+  position: relative;
+  width: 400px;
+}
+
+.signup-form h2 {
+  color: #333333;
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.signup-form p {
+  color: #333333;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.signup-form label {
+  color: #333333;
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.signup-form input[type="text"], .signup-form input[type="email"], .signup-form input[type="password"] {
+  border-radius: 50px;
+  border: none;
+  background-color: #F5F7F9;
+  color: #1d1d1d;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 15px;
+  width: 94%;
+}
+
+.signup-form input[type="submit"] {
+  background-color: #fcaa53;
+  border-radius: 50px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 15px;
+  width: 100%;
+}
+
+.signup-animation {
+  background-image: url("../Images/logo.png");
+  background-size: cover;
+  border-radius: 50%;
+  height: 100px;
+  position: absolute;
+  right: -50px;
+  top: -50px;
+  width: 100px;
+}
+
+.leftAligned{
+  display: flex; justify-content: flex-end;
+}
+
+.leftAligned span{
+  color: #fcaa53;
+}
+
+.leftAligned a{
+  text-decoration: none;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.alert {
+  padding: 15px;
+  color: white;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.alert-warning {
+  background-color: #fccf53;
+}
+
+.alert-success {
+  background-color: #7c993a;
+}
+
+.alert-danger {
+  background-color: #b00e02;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+.loader-bg{
+  position: absolute;
+  background-color: #1d1d1d65;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 20%;
+}
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-right: 10px solid #7c993a;
+  height: 50px;
+  width: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
