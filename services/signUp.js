@@ -124,7 +124,7 @@ if (auth.value == "Create Account") {
         .then((response) => {
           loader.innerHTML = "";
           console.log(response);
-          if (response) {
+          if (response._id) {
             console.log(response._id);
 
             createToLocal("restaurantId", response._id);

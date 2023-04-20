@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | FoodyBuddies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+</head>
+
+<body id="body-pd" class="default-bg p-5">
+    <header class="header" id="header">
+        <div class="header_toggle text-dark"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <a class="text-dark">
+            <span class="fs-6"><span class="d-none d-sm-inline" id="openedWorkspace">Gwaliya</span></span>
+        </a>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <a href="#" class="nav_logo"> <i class='bx bx-restaurant nav_logo-icon'></i> <span
+                        class="nav_logo-name">FoodyBuddies</span> </a>
+                <div class="nav_list">
+                    <a href="dashboard.html" class="nav_link"> <i class='bx bx-list-ul nav_icon'></i> <span
+                            class="nav_name">Orders</span> </a>
+                    <a href="#" class="nav_link active"> <i class='bx bx-dish nav_icon'></i> <span
+                            class="nav_name">Dishes</span> </a>
+                    <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span
+                            class="nav_name">Account</span> </a>
+                </div>
+            </div>
+            <a id="btnSignOut" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">SignOut</span> </a>
+        </nav>
+    </div>
+    <!--Container Main start-->
+    <div class="row sideMargin">
+
+        <div id="foodAlertPlaceHolder"></div>
+        <div class="col-12 mb-5">
+            <div class="row d-flex h-100">
+                <div class="col">
+                    <div class="row mb-4">
+                        <div class="col-5">
+                            <div>
+                                <a id="btnAddNewTask" onclick="showAddTaskModal()" class="btn btn-outline-dark mb-2"> <i
+                                        class='bx bxs-dish' id="header-toggle"></i> Register Food</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="list1" style="border-radius: .75rem; background-color: #ffffff;">
+                        <div class="card-body p-4">
+                            <p class="h6  m-1 text-dark">
+                                <i class="bx bx-notepad me-2"></i>
+                                <b>Registered Foods</b>
+                            </p>
+                            <hr class="my-4">
+                            <div id="registeredFoods"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="addTaskModal" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col-9 left-aligned">
+                        <h5 class="mt-3"><b>Register new food</b></h5>
+                    </div>
+                    <div class="col-3">
+                        <span class="close right-aligned">&times;</span>
+                    </div>
+                </div>
+                <hr class="my-3">
+                <div id="alertPlaceHolder"></div>
+                <div class="form-group">
+                    <label for="dishName">Dish Name</label>
+                    <input type="text" class="form-control" id="txtDishName" placeholder="Enter food name">
+                </div><br />
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="txtDescription" rows="3" placeholder="Enter food description"></textarea>
+                </div><br />
+                <div class="form-group">
+                    <label for="category">Select Cuisine Type</label>
+                    <select id="selectCategory" class="form-control">
+                        <option value="French">French</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Greek">Greek</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Lebanese">Lebanese</option>
+                    </select>
+                </div><br />
+                <div class="form-group">
+                    <label for="price">Food Price</label>
+                    <input type="number" class="form-control" id="txtFoodPrice" placeholder="Enter food price">
+                </div><br />
+                <div class="row">
+                    <div class="col-3">
+                        <img src="Images/preview.jpeg" id="previewImage" alt="preview" height="100px" />
+                    </div>
+                    <div class="col-7">
+                        <label for="price">Select Food Image</label>
+                        <input type="file" class="form-control" id="foodImage">
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <button type="submit" id="btnAddFood" class="btn btn-success">Add Food</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="services/manageFood.js"></script>
+    <script src="design-js/sidebar.js"></script>
+    <script src="design-js/modal2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
