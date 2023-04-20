@@ -31,6 +31,7 @@ function loadAllOrdersInTables(data) {
   var btnList = [];
   html = "";
   data.forEach((food) => {
+    console.log(food);
     if (food.status == "0") {
       html +=
         '<div class="card">' +
@@ -52,10 +53,8 @@ function loadAllOrdersInTables(data) {
         '<p class="card-text"><b>Quantity:</b> ' +
         food.quantity +
         "</p>" +
-        '<p class="card-text"><b>Quantity:</b> ' +
-        food.quantity +
-        "</p>" +
-        '<button type="button" class="btn btn-success">Activate</button>' +
+        '<h4 class="card-text"><b>Accepted</b> ' +
+        "</h4>" +
         "</div>" +
         "</div>" +
         "</div>" +
@@ -88,21 +87,47 @@ function loadAllOrdersInTables(data) {
         "</div>" +
         "</div>" +
         "</div>";
-      btnList.push({ foodID: food._id, status: food.status });
+      btnList.push({ orderId: food._id });
     }
   });
 
   document.getElementById("pendingOrders").innerHTML = html;
   btnList.forEach((food) => {
     document
-      .getElementById(food.foodID)
+      .getElementById(food.orderId)
       .addEventListener("click", async (e) => {
         AcceptTheOrder(food);
       });
   });
 }
 
-function AcceptTheOrder(food) {}
+function AcceptTheOrder(food) {
+  console.log(food);
+  fetch("http://localhost:8081/acceptTheOrder", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      orderId: food.orderId,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.label == "success") {
+        alert(data.message);
+        window.location.href = "dashboard.html";
+      } else {
+        alert(data.message);
+        window.location.href = "dashboard.html";
+      }
+      loadRegisteredFoods(data);
+    })
+    .catch((error) => console.error(error));
+}
 
 function getOrders() {
   fetch("http://localhost:8081/getRestaurantsOrder", {
