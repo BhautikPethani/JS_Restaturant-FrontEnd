@@ -17,6 +17,7 @@ fetch("http://localhost:8081/checkRestaurantIsRegisteredOrNot", {
     if (data.label != "success") {
       window.location.href = "login.html";
     }
+    getOrders();
   })
   .catch((error) => console.error(error));
 
@@ -25,62 +26,102 @@ document.getElementById("btnSignOut").addEventListener("click", async (e) => {
   deleteFromLocal("restaurantId");
   window.location.href = "login.html";
 });
-// document.getElementById("ordersTab").addEventListener("click", function () {
-//   showTab("ordersTab", "ordersContent");
-// });
 
-// document.getElementById("addFoodTab").addEventListener("click", function () {
-//   showTab("addFoodTab", "addFoodContent");
-// });
+function loadAllOrdersInTables(data) {
+  var btnList = [];
+  html = "";
+  data.forEach((food) => {
+    if (food.status == "0") {
+      html +=
+        '<div class="card">' +
+        '<div class="row">' +
+        '<div class="col-3">' +
+        '<img src="http://localhost:8081/' +
+        food.imagePath +
+        '"' +
+        'class="card-img-top" alt="...">' +
+        "</div>" +
+        '<div class="col-9">' +
+        '<div class="card-body">' +
+        '<h4 class="card-title"><b>' +
+        food.foodName +
+        "</b></h4>" +
+        '<h5 style="color: red"><b>Notes:</b>' +
+        food.Notes +
+        "</h5>" +
+        '<p class="card-text"><b>Quantity:</b> ' +
+        food.quantity +
+        "</p>" +
+        '<p class="card-text"><b>Quantity:</b> ' +
+        food.quantity +
+        "</p>" +
+        '<button type="button" class="btn btn-success">Activate</button>' +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>";
+    } else {
+      html +=
+        '<div class="card">' +
+        '<div class="row">' +
+        '<div class="col-3">' +
+        '<img src="http://localhost:8081/' +
+        food.imagePath +
+        '"' +
+        'class="card-img-top" alt="...">' +
+        "</div>" +
+        '<div class="col-9">' +
+        '<div class="card-body">' +
+        '<h4 class="card-title"><b>' +
+        food.foodName +
+        "</b></h4>" +
+        '<h5 style="color: red"><b>Notes:</b>' +
+        food.Notes +
+        "</h5>" +
+        '<p class="card-text"><b>Quantity:</b> ' +
+        food.quantity +
+        "</p>" +
+        '<button type="button" id="' +
+        food._id +
+        '" class="btn btn-success">Accept</button>' +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>";
+      btnList.push({ foodID: food._id, status: food.status });
+    }
+  });
 
-// document
-//   .getElementById("addFoodForm")
-//   .addEventListener("submit", function (event) {
-//     event.preventDefault();
+  document.getElementById("pendingOrders").innerHTML = html;
+  btnList.forEach((food) => {
+    document
+      .getElementById(food.foodID)
+      .addEventListener("click", async (e) => {
+        AcceptTheOrder(food);
+      });
+  });
+}
 
-//     // Get form data
-//     const foodName = document.getElementById("foodName").value;
-//     const foodDescription = document.getElementById("foodDescription").value;
-//     const foodPrice = document.getElementById("foodPrice").value;
-//     const foodCategory = document.getElementById("foodCategory").value;
+function AcceptTheOrder(food) {}
 
-//     // Make a POST request to add food to MongoDB
-//     fetch("http://localhost:8081/addFood", {
-//       method: "POST",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//         "Access-Control-Allow-Origin": "*",
-//       },
-//       body: JSON.stringify({
-//         foodName: foodName,
-//         foodDescription: foodDescription,
-//         foodPrice: foodPrice,
-//         foodCategory: foodCategory,
-//         restaurantId: restaurantId,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data) {
-//           alert(data.message);
-//         } else {
-//           alert("Failed to add food. Please try again.");
-//         }
-//       })
-//       .catch((error) => console.error(error));
-//   });
-
-// function showTab(tabId, contentId) {
-//   document.querySelectorAll(".tab").forEach((tab) => {
-//     tab.classList.remove("active");
-//   });
-//   document.getElementById(tabId).classList.add("active");
-//   document.querySelectorAll(".tab-content").forEach((content) => {
-//     content.style.display = "none";
-//   });
-//   document.getElementById(contentId).style.display = "block";
-// }
+function getOrders() {
+  fetch("http://localhost:8081/getRestaurantsOrder", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      restaurantId: restaurantId,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      loadAllOrdersInTables(data);
+    })
+    .catch((error) => console.error(error));
+}
 
 function createToLocal(key, value) {
   const toJson = JSON.stringify(value);
@@ -96,30 +137,3 @@ function readFromLocal(key) {
 function deleteFromLocal(key) {
   localStorage.removeItem(key);
 }
-
-const fileInput = document.getElementById("foodImage");
-
-const previewImage = document.getElementById("previewImage");
-
-fileInput.addEventListener("select", async (e) => {
-  console.log("DONE");
-  previewImage.src = fileInput.baseURI;
-});
-
-// const submit = document.getElementById("submit");
-// submit.addEventListener("click", async (e) => {
-//   // create a new FormData object
-//   var formdata = new FormData();
-//   formdata.append("file", fileInput.files[0]);
-
-//   var requestOptions = {
-//     method: "POST",
-//     body: formdata,
-//     redirect: "follow",
-//   };
-
-//   fetch("http://localhost:8081/upload", requestOptions)
-//     .then((response) => response.text())
-//     .then((result) => console.log(result))
-//     .catch((error) => console.log("error", error));
-// });
